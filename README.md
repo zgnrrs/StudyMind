@@ -37,15 +37,4 @@ The project is currently under active development. The codebase and architecture
 
 ## 🚀 Getting Started
 
-### Prerequisites
 
-- Python 3.x
-- pip
-
-### Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/zgnrrs/StudyMind.git
-cd StudyMind
