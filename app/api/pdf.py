@@ -6,7 +6,8 @@ from app.services.pdf_service import extract_text_from_pdf
 from app.services.text_cleaner import clean_text
 from app.services.ai_service import (
     generate_summary,
-    generate_study_material
+    generate_study_material,
+    generate_questions
 )
 
 router = APIRouter()
@@ -33,6 +34,13 @@ async def upload_pdf(file: UploadFile = File(...)):
         # Metni temizle
         text = clean_text(text)
 
+        # PDF'den metin okunamadıysa
+        if not text.strip():
+            return {
+                "filename": file.filename,
+                "error": "Bu PDF'den okunabilir metin bulunamadı. Lütfen metin içeren bir PDF yükleyin."
+            }
+
         # Kısa özet oluştur
         summary = generate_summary(text)
 
@@ -44,6 +52,48 @@ async def upload_pdf(file: UploadFile = File(...)):
             "text": text,
             "summary": summary,
             "study_material": study_material
+        }
+
+    finally:
+
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+
+@router.post("/generate-questions")
+async def generate_questions_endpoint(file: UploadFile = File(...)):
+
+    file_content = await file.read()
+
+    with tempfile.NamedTemporaryFile(
+        delete=False,
+        suffix=".pdf"
+    ) as temp_file:
+
+        temp_file.write(file_content)
+        temp_path = temp_file.name
+
+    try:
+
+        # PDF'den metni çıkar
+        text = extract_text_from_pdf(temp_path)
+
+        # Metni temizle
+        text = clean_text(text)
+
+        # PDF'den metin okunamadıysa
+        if not text.strip():
+            return {
+                "filename": file.filename,
+                "error": "Bu PDF'den okunabilir metin bulunamadı. Lütfen metin içeren bir PDF yükleyin."
+            }
+
+        # Soru oluştur
+        questions = generate_questions(text)
+
+        return {
+            "filename": file.filename,
+            "questions": questions
         }
 
     finally:

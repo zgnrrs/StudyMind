@@ -157,3 +157,47 @@ Ders materyali:
         study_notes.append(note)
 
     return "\n\n".join(study_notes)
+
+def generate_questions(text: str) -> str:
+    """
+    Ders materyalinden çoktan seçmeli sorular oluşturur.
+    """
+
+    chunks = split_text(text, max_chars=12000)
+
+    # Çok uzun PDF'lerde ilk parçayı kullanıyoruz.
+    # Hackathon için yeterli.
+    chunk = chunks[0]
+
+    prompt = f"""
+Aşağıdaki ders materyaline göre 5 adet çoktan seçmeli soru oluştur.
+
+Kurallar:
+- Sorular sadece verilen materyale dayanmalı.
+- Her sorunun 4 seçeneği olmalı.
+- Sadece 1 doğru cevap olmalı.
+- Sorular orta seviyede olmalı.
+- Türkçe yaz.
+- En sonda doğru cevabı belirt.
+
+Şu formatı kullan:
+
+SORU 1:
+Soru metni
+
+A) ...
+B) ...
+C) ...
+D) ...
+
+Doğru Cevap: B
+
+SORU 2:
+...
+
+Ders materyali:
+
+{chunk}
+"""
+
+    return ask_ai(prompt)

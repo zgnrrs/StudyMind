@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMind</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-mark">✦</span>
+        StudyMind
+    </div>
+
+    <div class="nav-text">
+        AI destekli çalışma asistanın
+    </div>
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+        <div class="badge">✦ AI-POWERED STUDY ASSISTANT</div>
+
+        <h1>
+            Ders çalışmayı<br>
+            <span>daha akıllı hale getir.</span>
+        </h1>
+
+        <p>
+            Ders materyalini yükle. StudyMind senin için
+            özet çıkarsın, ders notu hazırlasın ve sorular oluştursun.
+        </p>
+    </section>
+
+
+    <section class="upload-card">
+
+        <div class="upload-icon">
+            ↑
+        </div>
+
+        <h2>Materyalini yükle</h2>
+
+        <p>
+            PDF dosyanı buraya bırak veya bilgisayarından seç.
+        </p>
+
+        <label class="file-button">
+            PDF Dosyası Seç
+            <input type="file" id="pdfFile" accept=".pdf">
+        </label>
+
+        <div id="selectedFile" class="selected-file hidden"></div>
+
+        <button class="analyze-button" onclick="uploadPDF()">
+            ✦ Materyali Analiz Et
+        </button>
+
+        <small>
+            Yalnızca PDF dosyaları desteklenmektedir.
+        </small>
+
+    </section>
+
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+
+        <div>
+            <strong>Materyalin analiz ediliyor</strong>
+            <span>Bu işlem birkaç saniye sürebilir...</span>
+        </div>
+    </div>
+
+
+    <div id="result" class="hidden">
+
+        <div class="result-header">
+            <div>
+                <span class="result-label">ANALİZ TAMAMLANDI</span>
+                <h2>Çalışmaya hazırsın.</h2>
+            </div>
+        </div>
+
+
+        <section class="result-card">
+            <div class="card-title">
+                <span class="card-icon">✦</span>
+                <div>
+                    <h3>Özet</h3>
+                    <p>Materyalinin kısa özeti</p>
+                </div>
+            </div>
+
+            <div id="summary" class="content"></div>
+        </section>
+
+
+        <section class="result-card">
+            <div class="card-title">
+                <span class="card-icon">☷</span>
+                <div>
+                    <h3>Ders Notları</h3>
+                    <p>Sınava hazırlanırken kullanabileceğin notlar</p>
+                </div>
+            </div>
+
+            <div id="studyMaterial" class="content"></div>
+        </section>
+
+
+        <section class="question-card">
+
+            <div>
+                <span class="question-label">TEST YOUR KNOWLEDGE</span>
+                <h2>Hazır mısın?</h2>
+                <p>
+                    Yüklediğin materyale göre yapay zekâ tarafından
+                    sorular oluştur.
+                </p>
+            </div>
+
+            <button onclick="generateQuestions()">
+                ❓ Soru Oluştur
+            </button>
+
+        </section>
+
+
+        <section id="questionsSection" class="result-card hidden">
+
+            <div class="card-title">
+                <span class="card-icon">?</span>
+                <div>
+                    <h3>Sorular</h3>
+                    <p>Materyaline göre oluşturulan sorular</p>
+                </div>
+            </div>
+
+            <div id="questions" class="content"></div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+    StudyMind · AI destekli öğrenme
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="script.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
+
