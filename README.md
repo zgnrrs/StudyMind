@@ -1,76 +1,100 @@
-# ✦ StudyMind
+# 📚 StudyMind
 
-### AI Destekli Kişiselleştirilmiş Ders Çalışma Asistanı
+**AI-powered study assistant that transforms PDF course materials into structured study content and practice questions.**
 
-StudyMind, öğrencilerin ders materyallerini daha kolay anlayıp çalışabilmesi için geliştirilmiş yapay zekâ destekli bir çalışma asistanıdır.
+StudyMind is an educational AI application designed to help students study more efficiently. Users can upload their course materials as PDF files, and StudyMind analyzes the content to generate a concise summary, structured study notes, and exam-oriented questions.
 
-Öğrenci bir **PDF ders materyali** yükler. StudyMind bu materyali analiz ederek:
+---
 
-* 📖 Özet oluşturur
-* 📝 Ders notları oluşturur
-* ❓ Materyale özel çalışma soruları üretir
+## 🚀 Features
 
-## 🚀 Nasıl Çalışır?
+### 📄 PDF Upload
 
-```text
-PDF Yükle
-    ↓
-PDF'den Metin Çıkarma
-    ↓
-Metin Temizleme
-    ↓
-Yapay Zekâ Analizi
-    ↓
-┌─────────────┬──────────────┬───────────────┐
-│    Özet     │  Ders Notu   │    Sorular    │
-└─────────────┴──────────────┴───────────────┘
-```
+Upload any text-based PDF course material directly to the application.
 
-StudyMind, yüklenen materyalin içeriğini doğrudan analiz ederek çıktıları materyale göre oluşturur.
+### 🧠 AI-Powered Analysis
 
-## 🧠 Özellikler
+StudyMind uses an AI model to analyze the uploaded material and understand its content.
 
-### 📄 PDF Analizi
+### 📖 Automatic Summarization
 
-Yüklenen PDF içerisindeki metin PyMuPDF kullanılarak çıkarılır ve AI işleminden önce temizlenir.
+The application generates a structured summary containing:
 
-### 📖 Akıllı Özet
+* Main ideas
+* Important definitions
+* Exam-critical information
+* Key concepts
 
-Ders materyalindeki ana fikirleri, önemli kavramları ve sınav açısından önemli noktaları öne çıkaran bir özet oluşturulur.
+### 📝 Study Notes
 
-### 📝 Ders Notu
+The uploaded material is transformed into organized study notes with sections such as:
 
-Materyal, öğrencinin çalışmasını kolaylaştıracak şekilde düzenlenmiş ders notlarına dönüştürülür.
+* Concept explanation
+* Important information
+* Key concepts
+* Examples
+* Exam-critical points
+* Commonly confused concepts
 
-### ❓ Soru Üretimi
+### ❓ Practice Question Generation
 
-Yüklenen materyalin içeriğine göre yapay zekâ tarafından çalışma soruları oluşturulur.
+StudyMind can generate multiple-choice questions based directly on the uploaded material, helping students test their understanding.
 
-### 🎨 Öğrenci Dostu Arayüz
+### 🎨 Student-Friendly Interface
 
-Çıktılar başlıklar, listeler, vurgular ve kod bloklarıyla daha okunabilir şekilde gösterilir.
+The web interface presents generated content in a clean, structured and easy-to-read format.
 
-## 🛠️ Kullanılan Teknolojiler
+---
 
-**Backend**
+## 🛠️ Technologies
+
+### Backend
 
 * Python
 * FastAPI
 * PyMuPDF
-
-**Yapay Zekâ**
-
+* OpenAI Python SDK
 * Groq API
-* OpenAI-compatible API
-* `openai/gpt-oss-120b`
 
-**Frontend**
+### Frontend
 
 * HTML
 * CSS
 * JavaScript
 
-## 📁 Proje Yapısı
+### AI
+
+* Groq API
+* `openai/gpt-oss-120b`
+
+---
+
+## 🔄 How It Works
+
+```text
+        PDF Upload
+             │
+             ▼
+      PDF Text Extraction
+             │
+             ▼
+        Text Cleaning
+             │
+             ▼
+       AI Content Analysis
+             │
+       ┌─────┼─────┐
+       ▼     ▼     ▼
+    Summary Notes Questions
+       │     │     │
+       └─────┼─────┘
+             ▼
+      Student Study Material
+```
+
+---
+
+## 💻 Project Structure
 
 ```text
 StudyMind/
@@ -91,64 +115,111 @@ StudyMind/
 │
 ├── main.py
 ├── README.md
-├── .gitignore
+├── requirements.txt
 └── .env
 ```
 
-## ⚙️ Kurulum
+---
 
-Projeyi klonladıktan sonra sanal ortam oluşturun:
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/zgnrrs/StudyMind.git
+cd StudyMind
+```
+
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Sanal ortamı aktif edin:
+### 3. Activate the virtual environment
 
-### Windows
+**Windows:**
 
 ```bash
 .venv\Scripts\activate
 ```
 
-Gerekli paketleri yükleyin:
+### 4. Install dependencies
 
 ```bash
-pip install fastapi uvicorn python-multipart pymupdf python-dotenv openai
+pip install -r requirements.txt
 ```
 
-Ardından proje klasöründe `.env` dosyası oluşturun:
+### 5. Configure the API key
+
+Create a `.env` file in the project root:
 
 ```env
 GROQ_API_KEY=your_api_key_here
 ```
 
-Uygulamayı çalıştırın:
+### 6. Start the application
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Tarayıcıdan:
+The application will be available at:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-adresine gidin.
+---
 
-## 🔐 Güvenlik
+## 📚 Usage
 
-API anahtarı `.env` dosyasında tutulmaktadır ve `.gitignore` ile GitHub'a gönderilmemektedir.
-
-## 🎯 Projenin Amacı
-
-StudyMind'ın amacı, öğrencilerin uzun ve dağınık ders materyalleriyle çalışırken harcadıkları zamanı azaltmak ve tek bir materyal üzerinden farklı çalışma içerikleri oluşturabilmelerini sağlamaktır.
-
-> **Upload your material. Understand it. Study smarter.**
+1. Open StudyMind in your browser.
+2. Select a PDF course material.
+3. Upload the PDF.
+4. Wait for the AI analysis to finish.
+5. Review the generated summary and study notes.
+6. Click **Generate Questions** to create practice questions.
+7. Use the generated material to prepare for your exam.
 
 ---
 
-### Hackathon Project
+## 🎯 Goal
 
-StudyMind, öğrenme deneyimini yapay zekâ ile desteklemek amacıyla geliştirilmiş bir hackathon projesidir.
+The goal of StudyMind is to reduce the time students spend manually processing lecture materials and help them focus on actually learning the content.
+
+Instead of reading through a large PDF and manually creating notes and questions, students can use StudyMind to transform their existing course materials into a personalized study resource.
+
+---
+
+## 🔮 Future Improvements
+
+Possible future improvements include:
+
+* Difficulty selection for generated questions
+* Different question types
+* Interactive quizzes
+* Answer explanations
+* Flashcard generation
+* Personalized study plans
+* Progress tracking
+* User accounts
+* Support for image-based/scanned PDFs
+* Improved handling of tables and diagrams
+* Multi-language support
+
+---
+
+## 🏆 Project
+
+StudyMind was developed as an AI-powered educational project for a hackathon.
+
+The project focuses on combining **generative AI, document processing, and web technologies** to create a practical study assistant for students.
+
+---
+
+## 👩‍💻 Team
+
+**StudyMind Team**
+
+Built with ❤️ and AI to make studying smarter.
